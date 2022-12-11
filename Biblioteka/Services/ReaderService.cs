@@ -15,7 +15,7 @@ namespace Biblioteka.Services
         private readonly IReaderRepository _readerRepository;
         public ReaderService(IReaderRepository readerRepository)
         {
-            _readerRepository= readerRepository;
+            _readerRepository = readerRepository;
         }
 
         public static Reader CreateReader(string firstName, string lastName, string pesel, string role)
@@ -50,6 +50,7 @@ namespace Biblioteka.Services
 
         public static void Delete(Guid id)
         {
+            //sprawdzic czy nie ma aktywnych wypozyczen
             var readerToDelete = _readerRepository.GetReaderById(id);
             if (readerToDelete != null)
             {
@@ -67,6 +68,7 @@ namespace Biblioteka.Services
             }
             readerToUpdate.Update(firstName, lastName, pesel);
             _readerRepository.Update(readerToUpdate);
+            return readerToUpdate;
         }
     }
 }
