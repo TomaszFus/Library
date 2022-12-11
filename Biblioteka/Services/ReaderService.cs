@@ -18,7 +18,7 @@ namespace Biblioteka.Services
             _readerRepository = readerRepository;
         }
 
-        public static Reader CreateReader(string firstName, string lastName, string pesel, string role)
+        public Reader CreateReader(string firstName, string lastName, string pesel, string role)
         {
             var readerExist = _readerRepository.GetReaderByPesel(pesel);
             if (readerExist != null)
@@ -31,7 +31,7 @@ namespace Biblioteka.Services
             return reader;
         }
 
-        public static Reader ChangeRole(Reader reader, string newRole)
+        public Reader ChangeRole(Reader reader, string newRole)
         {
             if (reader.Role == "lecturer" && newRole == "student")
             {
@@ -48,7 +48,7 @@ namespace Biblioteka.Services
             return reader;
         }
 
-        public static void Delete(Guid id)
+        public void Delete(Guid id)
         {
             //sprawdzic czy nie ma aktywnych wypozyczen
             var readerToDelete = _readerRepository.GetReaderById(id);
@@ -59,7 +59,7 @@ namespace Biblioteka.Services
             throw new ReaderNotFound(id);
         }
 
-        public static Reader Updade(Guid id, string firstName, string lastName, string pesel)
+        public Reader Updade(Guid id, string firstName, string lastName, string pesel)
         {
             var readerToUpdate = _readerRepository.GetReaderById(id);
             if (readerToUpdate is null)
