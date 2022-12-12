@@ -12,9 +12,11 @@ namespace Biblioteka.Services
     public sealed class BookService
     {
         private readonly IBookRepository _bookRepository;
-        public BookService(IBookRepository bookRepository)
+        private readonly IRentRepository _rentRepository;
+        public BookService(IBookRepository bookRepository, IRentRepository rentRepository)
         {
-            _bookRepository= bookRepository;
+            _bookRepository = bookRepository;
+            _rentRepository = rentRepository;
         }
 
         public Book AddBook(string title, string author, int quantity = 1)
@@ -54,5 +56,29 @@ namespace Biblioteka.Services
             _bookRepository.Update(book);
             return book;
         }
+
+        public void DeleteBook(string title, string author)
+        {
+            var book = _bookRepository.GetBookByTitleAndAuthor(title, author);
+            if (book is null)
+            {
+                throw new BookNotFound();
+            }
+
+            var rents = _rentRepository.GetRentsByBook(title, author);
+
+            var bookIsRented = rents.Any(x => x.Ended == false);
+
+            if (bookIsRented)
+            {
+                throw new BookIsRentedException();
+            }
+
+            _bookRepository.DeleteBook(book);
+
+
+        }
+
+
     }
 }

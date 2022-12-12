@@ -12,5 +12,7 @@ namespace Biblioteka.Repositories.Abstract
         public void AddRent(Rent borrowing);
         public void UpdateRent(Rent borrowing);
         public Rent GetRentByPeselAndBook(string pesel, string bookTitle, string bookAuthor);
+        public IEnumerable<Rent> GetRentsByBook(string bookTitle, string bookAuthor);
+        public IEnumerable<Rent> GetRentsByReader(string pesel);
     }
 }

@@ -23,10 +23,20 @@ namespace Biblioteka.Repositories.Concrete
             _libraryDbContext.Rents.Add(rent);
             _libraryDbContext.SaveChanges();
         }
-
+        
         public Rent GetRentByPeselAndBook(string pesel, string bookTitle, string bookAuthor)
         {
             return _libraryDbContext.Rents.Include(x=>x.Reader).Include(x=>x.Book).FirstOrDefault(x => x.Reader.Pesel == pesel && x.Book.Author == bookAuthor && x.Book.Title == bookTitle && x.Ended==false);
+        }
+
+        public IEnumerable<Rent> GetRentsByBook(string bookTitle, string bookAuthor)
+        {
+            return _libraryDbContext.Rents.Where(x => x.Book.Title == bookTitle && x.Book.Author == bookAuthor).ToList();
+        }
+
+        public IEnumerable<Rent> GetRentsByReader(string pesel)
+        {
+            return _libraryDbContext.Rents.Where(x => x.Reader.Pesel == pesel).ToList();
         }
 
         public void UpdateRent(Rent rent)
