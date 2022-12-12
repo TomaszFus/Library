@@ -13,9 +13,11 @@ namespace Biblioteka.Services
     public sealed class ReaderService
     {
         private readonly IReaderRepository _readerRepository;
-        public ReaderService(IReaderRepository readerRepository)
+        private readonly IRentRepository _rentRepository;
+        public ReaderService(IReaderRepository readerRepository, IRentRepository rentRepository)
         {
             _readerRepository = readerRepository;
+            _rentRepository = rentRepository;
         }
 
         public Reader CreateReader(string firstName, string lastName, string pesel, string role)
@@ -48,15 +50,21 @@ namespace Biblioteka.Services
             return reader;
         }
 
-        public void Delete(Guid id)
+        public void Delete(string pesel)
         {
-            //sprawdzic czy nie ma aktywnych wypozyczen
-            var readerToDelete = _readerRepository.GetReaderById(id);
-            if (readerToDelete != null)
+            var readerToDelete = _readerRepository.GetReaderByPesel(pesel);
+            if (readerToDelete is null)
             {
-                _readerRepository.Delete(readerToDelete);
+                throw new ReaderNotFound();
             }
-            throw new ReaderNotFound(id);
+
+            var rents = _rentRepository.GetRentsByReader(pesel);
+            var readerHaveRent = rents.Any(x=>x.Ended == false);
+            if (readerHaveRent)
+            {
+                throw new ReaderHaveBookException();
+            }
+            _readerRepository.Delete(readerToDelete);
         }
 
         public Reader Updade(Guid id, string firstName, string lastName, string pesel)
