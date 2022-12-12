@@ -15,7 +15,7 @@ namespace Biblioteka.Entities
         public string Title { get; private set; }
         public Availability Availability { get; private set; }
 
-        public Book(Guid id, string author, string title, int quantity) 
+        public Book(Guid id, string author, string title, int quantity=1) 
         {
             Id = id;
             Author = author;

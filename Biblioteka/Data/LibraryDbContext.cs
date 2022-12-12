@@ -16,5 +16,6 @@ namespace Biblioteka.Data
 
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Rent> Rents { get; set; }
     }
 }

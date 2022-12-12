@@ -13,5 +13,10 @@ namespace Biblioteka.Exception
         {
             Id = id;
         }
+
+        public ReaderNotFound() : base("Reader not found")
+        {
+
+        }
     }
 }

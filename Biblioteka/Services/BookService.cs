@@ -31,6 +31,7 @@ namespace Biblioteka.Services
             }
             else
             {
+                quantity = book.AddAvailability(quantity);
                 book.Update(author, title, quantity);
                 _bookRepository.Update(book);
             }
@@ -49,7 +50,6 @@ namespace Biblioteka.Services
             {
                 throw new BookNotFound();
             }
-            quantity = book.AddAvailability(quantity);
             book.Update(author, title, quantity);
             _bookRepository.Update(book);
             return book;
