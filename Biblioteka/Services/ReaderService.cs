@@ -35,16 +35,6 @@ namespace Biblioteka.Services
 
         public Reader ChangeRole(Reader reader, string newRole)
         {
-            if (reader.Role == "lecturer" && newRole == "student")
-            {
-                throw new RoleCannotBeChanged(reader.Role);
-            }
-
-            if (reader.Role == "employee")
-            {
-                throw new RoleCannotBeChanged(reader.Role);
-            }
-
             reader.UpdateRole(newRole);
             _readerRepository.Update(reader);
             return reader;

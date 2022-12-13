@@ -3,6 +3,7 @@ using Biblioteka.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,12 @@ namespace Biblioteka.Entities
         
         public void UpdateRole(Role newRole)
         {
-            if (this.Role =="employee")
+            if (this.Role == "lecturer" && newRole == "student")
+            {
+                throw new RoleCannotBeChanged(this.Role);
+            }
+
+            if (this.Role == "employee")
             {
                 throw new RoleCannotBeChanged(this.Role);
             }

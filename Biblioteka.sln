@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteka", "Biblioteka\Biblioteka.csproj", "{2F1E8484-02A7-4BEB-AF1C-069900BB9B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteka", "Biblioteka\Biblioteka.csproj", "{2F1E8484-02A7-4BEB-AF1C-069900BB9B14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{17ACDDDD-0C58-44D9-888B-E0422DD9C19D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryTests", "LibraryTests\LibraryTests.csproj", "{9C5D14BE-0A89-4883-91F6-436BC4A56BBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{2F1E8484-02A7-4BEB-AF1C-069900BB9B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F1E8484-02A7-4BEB-AF1C-069900BB9B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F1E8484-02A7-4BEB-AF1C-069900BB9B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C5D14BE-0A89-4883-91F6-436BC4A56BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C5D14BE-0A89-4883-91F6-436BC4A56BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C5D14BE-0A89-4883-91F6-436BC4A56BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C5D14BE-0A89-4883-91F6-436BC4A56BBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C5D14BE-0A89-4883-91F6-436BC4A56BBB} = {17ACDDDD-0C58-44D9-888B-E0422DD9C19D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C814805-FE46-4521-9B43-C92D14ED3425}
