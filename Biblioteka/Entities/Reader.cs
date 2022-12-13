@@ -38,12 +38,12 @@ namespace Biblioteka.Entities
         {
             if (this.Role == "lecturer" && newRole == "student")
             {
-                throw new RoleCannotBeChanged(this.Role);
+                throw new RoleCannotBeChangedException(this.Role);
             }
 
             if (this.Role == "employee")
             {
-                throw new RoleCannotBeChanged(this.Role);
+                throw new RoleCannotBeChangedException(this.Role);
             }
             Role = newRole;
         }

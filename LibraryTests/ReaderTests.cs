@@ -61,7 +61,7 @@ namespace LibraryTests
             Exception exception = Record.Exception(() => reader.UpdateRole(invalidRole));
 
             exception.ShouldNotBeNull();
-            exception.ShouldBeOfType<RoleCannotBeChanged>();
+            exception.ShouldBeOfType<RoleCannotBeChangedException>();
         }
 
         [Fact]

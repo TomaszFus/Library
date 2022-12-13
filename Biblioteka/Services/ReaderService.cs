@@ -25,7 +25,7 @@ namespace Biblioteka.Services
             var readerExist = _readerRepository.GetReaderByPesel(pesel);
             if (readerExist != null)
             {
-                throw new GivenPeselAlreadyExist(pesel);
+                throw new GivenPeselAlreadyExistException(pesel);
             }
             Reader reader = new Reader(Guid.NewGuid(), firstName, lastName, pesel, role);
             _readerRepository.AddReader(reader);
@@ -45,7 +45,7 @@ namespace Biblioteka.Services
             var readerToDelete = _readerRepository.GetReaderByPesel(pesel);
             if (readerToDelete is null)
             {
-                throw new ReaderNotFound();
+                throw new ReaderNotFoundException();
             }
 
             var rents = _rentRepository.GetRentsByReader(pesel);
@@ -62,7 +62,7 @@ namespace Biblioteka.Services
             var readerToUpdate = _readerRepository.GetReaderById(id);
             if (readerToUpdate is null)
             {
-                throw new ReaderNotFound(id);
+                throw new ReaderNotFoundException(id);
             }
             readerToUpdate.Update(firstName, lastName, pesel);
             _readerRepository.Update(readerToUpdate);

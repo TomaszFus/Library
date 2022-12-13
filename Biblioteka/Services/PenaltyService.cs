@@ -15,11 +15,11 @@ namespace Biblioteka.Services
         {
             if (reader is null)
             {
-                throw new ReaderNotFound();
+                throw new ReaderNotFoundException();
             }
             if (dueDate.Date > DateTime.Today || deliveryDate.Date > DateTime.Today || dueDate.Date >= deliveryDate.Date)
             {
-                throw new InvalidDate();
+                throw new InvalidDateException();
             }
             TimeSpan timeSpan = deliveryDate.Subtract(dueDate);
             int delay = (int)timeSpan.TotalDays;

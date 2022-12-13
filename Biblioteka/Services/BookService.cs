@@ -23,7 +23,7 @@ namespace Biblioteka.Services
         {
             if (quantity<=0)
             {
-                throw new InvalidQuantity();
+                throw new InvalidQuantityException();
             }
             var book = _bookRepository.GetBookByTitleAndAuthor(title, author);
             if (book is null)
@@ -45,12 +45,12 @@ namespace Biblioteka.Services
         {
             if (quantity < 0)
             {
-                throw new InvalidQuantity();
+                throw new InvalidQuantityException();
             }
             var book = _bookRepository.GetBookById(id);
             if (book is null)
             {
-                throw new BookNotFound();
+                throw new BookNotFoundException();
             }
             book.Update(author, title, quantity);
             _bookRepository.Update(book);
@@ -62,7 +62,7 @@ namespace Biblioteka.Services
             var book = _bookRepository.GetBookByTitleAndAuthor(title, author);
             if (book is null)
             {
-                throw new BookNotFound();
+                throw new BookNotFoundException();
             }
 
             var rents = _rentRepository.GetRentsByBook(title, author);

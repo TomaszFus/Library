@@ -26,12 +26,12 @@ namespace Biblioteka.Services
             var reader = _readerRepository.GetReaderByPesel(pesel);
             if (reader is null)
             {
-                throw new ReaderNotFound();
+                throw new ReaderNotFoundException();
             }
             var book = _bookRepository.GetBookByTitleAndAuthor(bookTitle, bookAuthor);
             if (book is null)
             {
-                throw new BookNotFound();
+                throw new BookNotFoundException();
             }
             if (book.Availability == 0)
             {
@@ -39,7 +39,7 @@ namespace Biblioteka.Services
             }
             if (rentDate.Date > DateTime.Today)
             {
-                throw new InvalidDate(rentDate);
+                throw new InvalidDateException(rentDate);
             }
             book.DecreaseAvailability();
             _bookRepository.Update(book);
@@ -59,7 +59,7 @@ namespace Biblioteka.Services
             var book = _bookRepository.GetBookByTitleAndAuthor(bookTitle, bookAuthor);
             if (book is null)
             {
-                throw new BookNotFound();
+                throw new BookNotFoundException();
             }
             book.IncreaseAvailability();
             rent.EndRent();

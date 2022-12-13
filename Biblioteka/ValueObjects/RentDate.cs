@@ -14,11 +14,11 @@ namespace Biblioteka.ValueObjects
         {
             if (value > DateTime.Today)
             {
-                throw new InvalidDate(value);
+                throw new InvalidDateException(value);
             }
             if (value == DateTime.MinValue)
             {
-                throw new InvalidDate();
+                throw new InvalidDateException();
             }
             Value = value;
         }

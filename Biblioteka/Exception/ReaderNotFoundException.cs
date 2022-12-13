@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Biblioteka.Exception
 {
-    public sealed class ReaderNotFound : CustomException
+    public sealed class ReaderNotFoundException : CustomException
     {
         public Guid Id { get; }
-        public ReaderNotFound(Guid id) : base($"Reader {id} not found")
+        public ReaderNotFoundException(Guid id) : base($"Reader {id} not found")
         {
             Id = id;
         }
 
-        public ReaderNotFound() : base("Reader not found")
+        public ReaderNotFoundException() : base("Reader not found")
         {
 
         }
