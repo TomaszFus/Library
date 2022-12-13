@@ -11,6 +11,15 @@ namespace Biblioteka.Services
 {
     public sealed class PenaltyService
     {
+        /// <summary>
+        /// Oblicza karę za przekroczenie terminu wypożyczenia zgodznie z wytycznymi
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="dueDate"></param>
+        /// <param name="deliveryDate"></param>
+        /// <returns></returns>
+        /// <exception cref="ReaderNotFoundException"></exception>
+        /// <exception cref="InvalidDateException"></exception>
         public int CalculatePenalty(Reader reader, DateTime dueDate, DateTime deliveryDate)
         {
             if (reader is null)

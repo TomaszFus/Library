@@ -20,7 +20,18 @@ namespace Biblioteka.Services
             _readerRepository = readerRepository;
             _bookRepository = bookRepository;
         }
-
+        /// <summary>
+        /// Wypożycza książkę, jeśli jest dostępna
+        /// </summary>
+        /// <param name="pesel"></param>
+        /// <param name="bookTitle"></param>
+        /// <param name="bookAuthor"></param>
+        /// <param name="rentDate"></param>
+        /// <returns></returns>
+        /// <exception cref="ReaderNotFoundException"></exception>
+        /// <exception cref="BookNotFoundException"></exception>
+        /// <exception cref="BookNotAvailableException"></exception>
+        /// <exception cref="InvalidDateException"></exception>
         public Rent AddRent(string pesel, string bookTitle, string bookAuthor, DateTime rentDate)
         {
             var reader = _readerRepository.GetReaderByPesel(pesel);
@@ -48,7 +59,14 @@ namespace Biblioteka.Services
             _rentRepository.AddRent(rent);
             return rent;
         }
-
+        /// <summary>
+        /// Kończy wypożyczenie, zwraca wypożyczoną książkę
+        /// </summary>
+        /// <param name="pesel"></param>
+        /// <param name="bookTitle"></param>
+        /// <param name="bookAuthor"></param>
+        /// <exception cref="RentNotFoundException"></exception>
+        /// <exception cref="BookNotFoundException"></exception>
         public void EndRent(string pesel, string bookTitle, string bookAuthor)
         {
             var rent = _rentRepository.GetRentByPeselAndBook(pesel, bookTitle, bookAuthor);

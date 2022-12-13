@@ -19,7 +19,15 @@ namespace Biblioteka.Services
             _readerRepository = readerRepository;
             _rentRepository = rentRepository;
         }
-
+        /// <summary>
+        /// Dodaje nowego czytelnika do biblioteki
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="pesel"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        /// <exception cref="GivenPeselAlreadyExistException"></exception>
         public Reader CreateReader(string firstName, string lastName, string pesel, string role)
         {
             var readerExist = _readerRepository.GetReaderByPesel(pesel);
@@ -32,14 +40,24 @@ namespace Biblioteka.Services
 
             return reader;
         }
-
+        /// <summary>
+        /// Zmienia rolę czytelnika
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="newRole"></param>
+        /// <returns></returns>
         public Reader ChangeRole(Reader reader, string newRole)
         {
             reader.UpdateRole(newRole);
             _readerRepository.Update(reader);
             return reader;
         }
-
+        /// <summary>
+        /// Usuwa czytelnika pod warunkiem, że nie posiada on wypożyczonych książek 
+        /// </summary>
+        /// <param name="pesel"></param>
+        /// <exception cref="ReaderNotFoundException"></exception>
+        /// <exception cref="ReaderHaveBookException"></exception>
         public void Delete(string pesel)
         {
             var readerToDelete = _readerRepository.GetReaderByPesel(pesel);
@@ -56,7 +74,15 @@ namespace Biblioteka.Services
             }
             _readerRepository.Delete(readerToDelete);
         }
-
+        /// <summary>
+        /// Modyfikuje dane użytkownica
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="pesel"></param>
+        /// <returns></returns>
+        /// <exception cref="ReaderNotFoundException"></exception>
         public Reader Updade(Guid id, string firstName, string lastName, string pesel)
         {
             var readerToUpdate = _readerRepository.GetReaderById(id);
